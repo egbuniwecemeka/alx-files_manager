@@ -32,6 +32,26 @@ class DBClient {
     }
 
     async nbUsers() {
-      
+      try {
+        const count = await this.db.collection('users').countDocuments();
+        return count;
+      } catch (error) {
+        console.error(`Failed to fetch users: ${error}`);
+        return 0;
+      };
+    }
+
+    async nbFiles() {
+      try {
+        const count = await this.client.collection('files');
+        return count;
+      } catch (error) {
+        console.error(`Failed to fetch files: ${error.message}`);
+        return 0;
+      };
     }
 }
+
+const dbClient = new DBClient;
+
+export default dbClient;
