@@ -23,8 +23,8 @@ class RedisClient {
     }
 
     isAlive() {
-        console.log('True')
-        return this.client.isOpen ? true : false;
+      const status = this.client.isOpen ? true : false;
+      console.log(status ? 'Connection is alive' : 'Connection not alive');
     }
 
     // asynchronous function for retrieving values of key
