@@ -34,6 +34,7 @@ class RedisClient {
           return res;
         } catch (error) {
           console.error(`Error while fetching ${key}: ${err}`);
+          return null;
     }}
 
     // asynchronous function for seeting key-value pairs after a certain duration
@@ -50,6 +51,7 @@ class RedisClient {
     async del(key) {
         try {
           const res = await this.client.del(key);
+          return res;
         } catch (err) {
             console.log(`Error while trying to delete ${key} with ${err} error`);
         }
