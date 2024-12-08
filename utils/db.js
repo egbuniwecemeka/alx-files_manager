@@ -26,4 +26,12 @@ class DBClient {
         console.error(`Login failed: ${error}`);
       });
     }
+
+    isAlive() {
+      return this.client.isOpen();
+    }
+
+    async nbUsers() {
+      
+    }
 }
