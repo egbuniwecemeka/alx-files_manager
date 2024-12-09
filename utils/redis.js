@@ -31,6 +31,7 @@ class RedisClient {
     async get(key) {
         try {
           const res = await this.client.get(key);
+          console.log(res);
           return res;
         } catch (error) {
           console.error(`Error while fetching ${key}: ${err}`);
@@ -41,6 +42,7 @@ class RedisClient {
     async set(key, value, time) {
         try {
           const res = await this.client.set(key, String(value), {EX: time});
+          console.log(res);
           return res;
         } catch (err) {
             console.log(`Error while setting ${key}: ${value} with expiration ${time}`);
