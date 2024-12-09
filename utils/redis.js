@@ -23,7 +23,7 @@ class RedisClient {
     }
 
     isAlive() {
-        console.log(`${this.client.isOpen}`);
+        console.log(this.client.isOpen ? true : false);
         return this.client.isOpen ? true : false;
     }
 
