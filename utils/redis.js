@@ -6,7 +6,9 @@ import { createClient } from 'redis';
 class RedisClient {
     constructor() {
         // Initialize the redis client
-        this.client = createClient();
+        const host = process.env.REDIS_HOST || '127.0.0.1';
+        const port = process.env.REDIS_PORT || 6379;
+        this.client = createClient({url: `redis://${host}:${port}`});
 
         // Listen and log errors
         this.client.on('error', (err) => {
