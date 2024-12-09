@@ -8,8 +8,12 @@ class RedisClient {
         // Configuration for the redis server
         const host = process.env.REDIS_HOST || '127.0.0.1';
         const port = process.env.REDIS_PORT || 6379
+
         // Initialize the redis client
         this.client = createClient({url: `redis://${host}:${port}`});
+
+        //
+        this.client.connect();
 
         this.client.on('connect', () => {
             console.log('Connection successful');
