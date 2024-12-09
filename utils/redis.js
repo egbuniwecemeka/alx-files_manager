@@ -1,66 +1,62 @@
-#!/usr/bin/node
+// utils/redis.js
 
-import { createClient } from 'redis';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
+const redis = require('redis');
 
 class RedisClient {
-    constructor() {
-        // Initialize the redis client
-        this.client = createClient();
+  constructor() {
+    this.client = redis.createClient();
 
+    // Handling error event
+    this.client.on('error', (err) => {
+      console.error('Redis client error:', err);
+    });
+  }
 
-        // Listen and log errors
-        this.client.on('error', (err) => {
-            console.error(`Redis connection error: ${err.message}`);
-        });
+  // Method to check if the connection to Redis is alive
+  isAlive() {
+    return this.client.connected;
+  }
 
-        // Ready listener to confirm connection stats
-        this.client.on('ready', () => {
-            console.log('Redis is ready and connected');
-        })
-    }
-    
-
-    isAlive() {
-        console.log('Checking if Redis client is alive:', this.client.connected);
-      return this.client.connected; 
-    }
-
-    // asynchronous function for retrieving values of key
-    async get(key) {
-        try {
-          const res = await this.client.get(key);
-          console.log(res);
-          return res;
-        } catch (error) {
-          console.error(`Error while fetching ${key}: ${err}`);
-          return null;
-    }}
-
-    // asynchronous function for seeting key-value pairs after a certain duration
-    async set(key, value, time) {
-        try {
-          const res = await this.client.set(key, String(value), {'EX': time});
-          console.log(res);
-          return res;
-        } catch (err) {
-            console.log(`Error while setting ${key}: ${value} with expiration ${time}`);
+  // Method to get a value from Redis by key
+  async get(key) {
+    return new Promise((resolve, reject) => {
+      this.client.get(key, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
         }
-    }
+      });
+    });
+  }
 
-    // asynchronous function for deleting specified key-value pairs
-    async del(key) {
-        try {
-          const res = await this.client.del(key);
-          return res;
-        } catch (err) {
-            console.log(`Error while trying to delete ${key} with ${err} error`);
+  // Method to set a value in Redis with expiration time
+  async set(key, value, duration) {
+    return new Promise((resolve, reject) => {
+      this.client.setex(key, duration, value, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
         }
-    }
+      });
+    });
+  }
+
+  // Method to delete a key-value pair from Redis
+  async del(key) {
+    return new Promise((resolve, reject) => {
+      this.client.del(key, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
 }
 
-const redisClient = new RedisClient()
-export default redisClient;
+// Exporting an instance of RedisClient
+const redisClient = new RedisClient();
+module.exports = redisClient;
