@@ -18,7 +18,7 @@ class RedisClient {
     
 
     isAlive() {
-      return this.client.isOpen ? true : false; 
+      return this.client.isOpen; 
     }
 /*
     // asynchronous function for retrieving values of key
