@@ -16,17 +16,14 @@ class RedisClient {
         // Listen and log errors
         this.client.on('error', (err) => {
             console.error(`Connection error: ${err}`);
-        });
-
-
-        
+        }); 
     }
 
-    /* isAlive() {
+     isAlive() {
         console.log(this.client.isOpen ? true : false);
         return this.client.isOpen ? true : false;
     }
-
+/*
     // asynchronous function for retrieving values of key
     async get(key) {
         try {
