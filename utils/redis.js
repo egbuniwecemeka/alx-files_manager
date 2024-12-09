@@ -9,10 +9,7 @@ dotenv.config();
 class RedisClient {
     constructor() {
         // Initialize the redis client
-        const host = process.env.REDIS_HOST;
-        const port = process.env.REDIS_PORT;
-        this.client = createClient({url: `redis://${host}:${port}`});
-        console.log(`env vars ${host}:${port}`);
+        this.client = createClient();
 
         // Listen and log errors
         this.client.on('error', (err) => {
