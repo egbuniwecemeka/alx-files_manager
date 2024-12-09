@@ -22,8 +22,9 @@ class RedisClient {
     
 
     isAlive() {
-      const id = this.client.connection_id;
+      const id = this.client.isOpen;
       console.log(id);
+      return id
     }
 /*
     // asynchronous function for retrieving values of key
