@@ -19,9 +19,11 @@ class RedisClient {
             console.error(`Redis connection error: ${err.message}`);
         }); 
     }
+    
 
     isAlive() {
-            return this.client.connected ? true : false;
+      const id = this.client.connection_id;
+      console.log(id);
     }
 /*
     // asynchronous function for retrieving values of key
