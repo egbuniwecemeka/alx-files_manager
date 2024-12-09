@@ -28,7 +28,7 @@ class RedisClient {
         console.log('Checking if Redis client is alive:', this.client.connected);
       return this.client.connected; 
     }
-/*
+
     // asynchronous function for retrieving values of key
     async get(key) {
         try {
@@ -59,7 +59,7 @@ class RedisClient {
         } catch (err) {
             console.log(`Error while trying to delete ${key} with ${err} error`);
         }
-    } */
+    }
 }
 
 const redisClient = new RedisClient()
