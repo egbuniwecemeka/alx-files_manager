@@ -25,7 +25,6 @@ class RedisClient {
 
     isAlive() {
       const id = this.client.isOpen;
-      console.log(id);
       return id
     }
 /*
