@@ -40,7 +40,7 @@ class RedisClient {
     // asynchronous function for seeting key-value pairs after a certain duration
     async set(key, value, time) {
         try {
-          const res = await this.client.set(key, value, {EX: time});
+          const res = await this.client.set(key, String(value), {EX: time});
           return res;
         } catch (err) {
             console.log(`Error while setting ${key}: ${value} with expiration ${time}`);
