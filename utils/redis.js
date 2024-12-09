@@ -20,13 +20,8 @@ class RedisClient {
         }); 
     }
 
-     async isAlive() {
-        try {
-            await this.client.ping();
-            return true
-        } catch (err) {
-            console.error('Redis is not alive:', err.message);
-        }
+    isAlive() {
+            return this.client.connected ? true : false;
     }
 /*
     // asynchronous function for retrieving values of key
