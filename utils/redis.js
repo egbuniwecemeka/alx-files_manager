@@ -1,13 +1,12 @@
 #!/usr/bin/node
 
-import res from 'express/lib/response';
-import { createClient } from 'redis';
+const redis = require('redis');
 
 
 class RedisClient {
     constructor() {
         // Initialize the redis client
-        this.client = createClient({url: 'redis://127.0.0.1:6379'});
+        this.client = redis.createClient({url: 'redis://127.0.0.1:6379'});
 
 
         // Listen and log errors
