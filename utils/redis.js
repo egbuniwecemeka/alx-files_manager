@@ -12,13 +12,16 @@ class RedisClient {
         this.client = createClient({url: `redis://${host}:${port}`});
 
         // Connect to redis server
-        // this.client.connect()
+        this.client.connect().catch((err) => {
+            console.error(`Failed to connect to Redis: ${err.message}`)
+        })
+
         this.client.on('connect', () => {
             console.log('Connection successful');
         })
         // Listen and log errors
         this.client.on('error', (err) => {
-            console.error(`Connection error: ${err}`);
+            console.error(`Redis connection error: ${err.message}`);
         }); 
     }
 
