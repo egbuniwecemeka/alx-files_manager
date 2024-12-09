@@ -5,8 +5,11 @@ import { createClient } from 'redis';
 
 class RedisClient {
     constructor() {
+        // Configuration for the redis server
+        const host = process.env.REDIS_HOST || '127.0.0.1';
+        const port = process.env.REDIS_PORT || 6379
         // Initialize the redis client
-        this.client = createClient();
+        this.client = createClient({url: `redis:${host}:${port}`});
 
         // Connect to redis server
         // this.client.connect()
