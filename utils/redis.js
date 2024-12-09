@@ -27,6 +27,7 @@ class RedisClient {
     
 
     isAlive() {
+        console.log('Checking if Redis client is alive:', this.client.connected);
       return this.client.connected; 
     }
 /*
