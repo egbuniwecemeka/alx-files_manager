@@ -12,8 +12,6 @@ class RedisClient {
         // Initialize the redis client
         this.client = createClient({url: `redis://${host}:${port}`});
 
-        //
-        this.client.connect();
 
         this.client.on('connect', () => {
             console.log('Connection successful');
