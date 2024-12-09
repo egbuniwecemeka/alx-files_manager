@@ -17,19 +17,12 @@ class RedisClient {
         // Listen and log errors
         this.client.on('error', (err) => {
             console.error(`Redis connection error: ${err.message}`);
-        }); 
-
-        // Connect to the Redis server
-        this.client.connect().then(() => {
-            console.log('Redis client connected successfully');
-        }).catch((err) => {
-            console.error(`Failed to connect to Redis: ${err.message}`);
         });
     }
     
 
     isAlive() {
-      return this.client.isOpen; 
+      return this.client.connected; 
     }
 /*
     // asynchronous function for retrieving values of key
