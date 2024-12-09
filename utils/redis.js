@@ -18,6 +18,11 @@ class RedisClient {
         this.client.on('error', (err) => {
             console.error(`Redis connection error: ${err.message}`);
         });
+
+        // Ready listener to confirm connection stats
+        this.client.on('ready', () => {
+            console.log('Redis is ready and connected');
+        })
     }
     
 
