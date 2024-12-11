@@ -1,11 +1,16 @@
 #!/usr/bin/node
 
 const express = require('express');
-const routes = express.Route()
+const routes = express.Router();
 
-// Contains all endpoints of API
-routes.get('/', (req, res) => {
-    res.send('Routes from /routes/index.js');
-})
+// endpoints for /status API
+routes.get('/status', (req, res) => {
+    res.status(200).send('Route endpoint for /status')
+});
+
+// endpoints for /status API
+routes.get('/stats', (req, res) => {
+    res.status(200).json({stats: 'Route endpoint for /stats'});
+});
 
 module.exports = routes;
