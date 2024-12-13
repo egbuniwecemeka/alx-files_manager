@@ -14,7 +14,7 @@ class DBClient {
 
       const url = `mongodb://${host}:${port}`;
 
-      this.client = new MongoClient(url);
+      this.client = new MongoClient(url, { useUnifiedTopology: true });
       this.db = null;
 
       this.client.connect()
@@ -28,7 +28,14 @@ class DBClient {
     }
 
     isAlive() {
-      return this.client.isOpen();
+      return this.client.db().admin().ping()
+        .then(() => {
+          return true;
+        })
+        .catch((err) => {
+          console.error('Database not alive:', err.message);
+          return false;
+        });
     }
 
     async nbUsers() {
@@ -43,7 +50,7 @@ class DBClient {
 
     async nbFiles() {
       try {
-        const count = await this.client.collection('files');
+        const count = await this.db.collection('files').countDocuments();
         return count;
       } catch (error) {
         console.error(`Failed to fetch files: ${error.message}`);
