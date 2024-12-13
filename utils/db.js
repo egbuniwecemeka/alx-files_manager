@@ -28,7 +28,14 @@ class DBClient {
     }
 
     isAlive() {
-      return this.client.db().admin().ping().then(() => true).catch(() => false);
+      return this.client.db().admin().ping()
+        .then(() => {
+          return true;
+        })
+        .catch((err) => {
+          console.error('Database not alive:', err.message);
+          return false;
+        });
     }
 
     async nbUsers() {
