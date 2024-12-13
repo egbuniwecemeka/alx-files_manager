@@ -43,7 +43,7 @@ class DBClient {
 
     async nbFiles() {
       try {
-        const count = await this.db.collection('files');
+        const count = await this.db.collection('files').countDocuments();
         return count;
       } catch (error) {
         console.error(`Failed to fetch files: ${error.message}`);
