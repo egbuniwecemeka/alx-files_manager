@@ -14,7 +14,7 @@ class DBClient {
 
       const url = `mongodb://${host}:${port}`;
 
-      this.client = new MongoClient(url);
+      this.client = new MongoClient(url, { useUnifiedTopology: true });
       this.db = null;
 
       this.client.connect()
@@ -28,7 +28,7 @@ class DBClient {
     }
 
     isAlive() {
-      return this.client.isOpen();
+      return this.client.db().admin().ping().then(() => true).catch(() => false);
     }
 
     async nbUsers() {
