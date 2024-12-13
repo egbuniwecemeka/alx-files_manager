@@ -10,4 +10,3 @@ routes.get('/stats', AppController.getStats);
 
 // Export routes/route
 module.exports = routes;
-
