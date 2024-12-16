@@ -12,13 +12,12 @@ class RedisClient {
         console.error(`Redis connection error: ${err.message}`);
     });
   }
-    
 
   isAlive() {
     return this.client.connected; 
   }
 
-    // asynchronous function for retrieving values of key
+  // asynchronous function for retrieving values of key
   async get(key) {
     return new Promise((resolve, reject) => {
       this.client.get(key, (err, result) => {
