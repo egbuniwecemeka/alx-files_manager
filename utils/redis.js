@@ -8,6 +8,10 @@ class RedisClient {
       console.error(`Connection failed: ${err}`);
     })
   }
+
+  isAlive() {
+    return this.client.connected;
+  }
 }
 
 const redisClient = new RedisClient();
