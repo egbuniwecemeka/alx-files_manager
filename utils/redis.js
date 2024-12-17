@@ -32,7 +32,7 @@ class RedisClient {
     }
   }
 
-  async setex(key, value, duration) {
+  async set(key, value, duration) {
     try {
       await this.asyncSet(key, duration, value);
     } catch (err) {
