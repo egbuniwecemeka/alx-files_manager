@@ -10,17 +10,21 @@ class RedisClient {
       console.error(`Connection failed: ${err}`);
     });
 
-    this.client.on('connect', () => {
+    this.client.on('ready', () => {
       this.isClientConnected = true;
     })
   
     this.asyncGet = promisify(this.client.get).bind(this.client);
     this.asyncSet = promisify(this.client.setex).bind(this.client);
     this.asyncDel = promisify(this.client.del).bind(this.client);
+
+    this.client.connect().catch((err) => {
+      console.error(`Connection to redis failed: ${err.message}`);
+    })
   }
 
   isAlive() {
-    return this.client.connected;
+    return this.client.isOpen;
   }
 
   async get(key) {
