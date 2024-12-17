@@ -21,7 +21,7 @@ class RedisClient {
   }
 
   isAlive() {
-    return this.client.connected;
+    return this.clientSuccess;
   }
 
   // asynchronous function for retrieving values of key
