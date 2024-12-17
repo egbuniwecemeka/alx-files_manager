@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const {createClient} = require('redis');
+const { createClient } = require('redis');
 
 class RedisClient {
   constructor() {
