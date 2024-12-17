@@ -9,12 +9,12 @@ class RedisClient {
 
     // Listen and log errors
     this.client.on('error', (err) => {
-        console.error(`Redis connection error: ${err.message}`);
+      console.error(`Redis connection error: ${err.message}`);
     });
   }
 
   isAlive() {
-    return this.client.connected; 
+    return this.client.connected;
   }
 
   // asynchronous function for retrieving values of key
@@ -24,7 +24,7 @@ class RedisClient {
         if (err) {
           reject(err);
         } else {
-          resolve(result)
+          resolve(result);
         }
       });
     });
@@ -47,11 +47,11 @@ class RedisClient {
   async del(key) {
     return new Promise((resolve, reject) => {
       this.client.del(key, (err, result) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(result);
-          }
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
       });
     });
   }
