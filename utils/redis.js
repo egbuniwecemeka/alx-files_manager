@@ -16,7 +16,7 @@ class RedisClient {
   
     this.asyncGet = promisify(this.client.get).bind(this.client);
     this.asyncSet = promisify(this.client.setex).bind(this.client)
-    this.asyncDel = promisify(this.client.del).bind(client)
+    this.asyncDel = promisify(this.client.del).bind(this.client)
   }
 
   isAlive() {
