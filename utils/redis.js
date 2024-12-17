@@ -6,22 +6,22 @@ class RedisClient {
   constructor() {
     // Initialize the redis client
     this.client = createClient();
-    this.clientSuccess = true;
+    this.isClientConnected = true;
 
       // Listen for succesful redis connection.
     this.client.on('connect', () => {
-      this.clientSuccess = true;
+      this.isClientConnected = true;
     })
 
     // Listen for redis connection error(s)
     this.client.on('error', (err) => {
       console.error(`Redis connection error: ${err.message}`);
-      this.clientSuccess = false;
+      this.isClientConnected = false;
     });
   }
 
   isAlive() {
-    return this.clientSuccess;
+    return this.isClientConnected;
   }
 
   // asynchronous function for retrieving values of key
