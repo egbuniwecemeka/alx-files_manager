@@ -1,11 +1,11 @@
 #!/usr/bin/node
 
-const redis = require('redis');
+const {createClient} = require('redis');
 
 class RedisClient {
   constructor() {
     // Initialize the redis client
-    this.client = redis.createClient();
+    this.client = createClient();
 
     // Listen and log errors
     this.client.on('error', (err) => {
