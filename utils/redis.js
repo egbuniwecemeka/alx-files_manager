@@ -8,6 +8,10 @@ class RedisClient {
 
     this.client.on('error', (err) => {
       console.error(`Connection failed: ${err}`);
+    });
+
+    this.client.on('connect', () => {
+      this.isClientConnected = true;
     })
   
     this.asyncGet = promisify(this.client.get).bind(this.client);
